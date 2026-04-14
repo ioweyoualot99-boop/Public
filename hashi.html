@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>哈士奇冰吧 · 视觉设计</title>
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --white: #ffffff;
+      --black: #1d1d1f;
+      --gray: #6e6e73;
+      --light-gray: #ebebed;
+      --divider: #d2d2d7;
+      --accent: #0071e3;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: "SF Pro Display", "Helvetica Neue", "PingFang SC", sans-serif;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 52px;
+    }
+
+    .nav-back {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 0.7; }
+    .nav-back::before { content: "←"; }
+
+    .nav-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    /* ── HEADER ── */
+    .project-header {
+      padding: 108px 24px 56px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .project-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      padding: 5px 12px;
+      border: none;
+      border-radius: 20px;
+      background: #ea7136;
+    }
+
+    .project-title {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    .project-desc {
+      font-size: 16px;
+      color: var(--gray);
+      line-height: 1.6;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ── IMAGE SECTIONS ── */
+    .images-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      background: var(--bg);
+    }
+
+    .project-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 板块标题：灰色底框 */
+    .block-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 0;
+      background: var(--bg);
+      padding: 12px 0 28px;
+      border-radius: 0;
+    }
+
+    .block-top {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+    }
+
+    .block-text {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .block-index {
+      font-size: 96px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: #d4d4d6;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .block-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .block-label {
+      font-size: 13px;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding-left: 2px;
+    }
+
+    /* 图片容器 */
+    .project-img {
+      width: 100%;
+      overflow: hidden;
+      background: var(--white);
+      border-radius: 0;
+    }
+
+    .project-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 占位块 */
+    .img-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      background: var(--light-gray);
+      color: var(--gray);
+      font-size: 13px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--divider);
+      padding: 28px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 16px; }
+      .project-header { padding: 84px 16px 40px; }
+      .project-desc { white-space: normal; font-size: 14px; }
+      .images-wrap { padding: 0 16px 80px; gap: 96px; }
+      .project-title { font-size: 32px; }
+      .block-index { font-size: 72px; }
+      .block-title { font-size: 72px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-back" href="index.html">作品集</a>
+  <span class="nav-title">哈士奇冰吧</span>
+</nav>
+
+<div class="project-header">
+  <p class="project-tag">电商全案 · 京东</p>
+  <h1 class="project-title">哈士奇冰吧旗舰店视觉设计</h1>
+  <p class="project-desc">负责品牌全年电商视觉输出，覆盖 KV、首页、主图、详情页及开屏海报，AI 辅助提升出图效率。</p>
+</div>
+
+<div class="images-wrap">
+
+  <div class="project-block">
+    <div class="block-header">
+      <div class="block-top">
+        <span class="block-index">01</span>
+        <div class="block-text"><span class="block-title">首图主视觉</span><span class="block-label">Primary Visual · 主视觉</span></div></div>
+    </div>
+    <div class="project-img">
+      <img src="./images/hck-首图.jpg" alt="首图主视觉">
+    </div>
+  </div>
+
+  <div class="project-block">
+    <div class="block-header">
+      <div class="block-top">
+        <span class="block-index">02</span>
+        <div class="block-text"><span class="block-title">品牌 KV 海报</span><span class="block-label">KV · 品牌形象</span></div></div>
+    </div>
+    <div class="project-img">
+      <img src="./images/hck-kv.jpg" alt="品牌KV海报">
+    </div>
+  </div>
+
+  <div class="project-block">
+    <div class="block-header">
+      <div class="block-top">
+        <span class="block-index">03</span>
+        <div class="block-text"><span class="block-title">App 开屏图</span><span class="block-label">Launch Screen · 活动推广</span></div></div>
+    </div>
+    <div class="project-img">
+      <img src="./images/hck-开屏图.jpg" alt="开屏海报">
+    </div>
+  </div>
+
+  <div class="project-block">
+    <div class="block-header">
+      <div class="block-top">
+        <span class="block-index">04</span>
+        <div class="block-text"><span class="block-title">商品详情页</span><span class="block-label">Detail Page · 电商落地</span></div></div>
+    </div>
+    <div class="project-img">
+      <img src="./images/hck-详情.jpg" alt="商品详情页">
+    </div>
+  </div>
+
+  <div class="project-block">
+    <div class="block-header">
+      <div class="block-top">
+        <span class="block-index">05</span>
+        <div class="block-text"><span class="block-title">其他设计</span><span class="block-label">Extension · 延展</span></div></div>
+    </div>
+    <div class="project-img">
+      <img src="./images/hck-主图.jpg" alt="商品详情页">
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 刘畅 · Visual Designer</p>
+</footer>
+
+</body>
+</html>
