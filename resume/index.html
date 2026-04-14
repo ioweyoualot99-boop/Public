@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MY PORTFOLIO · Visual Designer</title>
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --white: #ffffff;
+      --black: #1d1d1f;
+      --gray: #6e6e73;
+      --divider: #d2d2d7;
+      --accent: #accfdf;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--black);
+      font-family: "SF Pro Display", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 52px;
+    }
+
+    .nav-name {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+      margin: 0;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* 占位符（没有图片时显示） */
+    .hero-bg-placeholder {
+      position: absolute;
+      inset: 0;
+      background: #e8e8ea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    /* 深蓝色方块区域的浮动CTA */
+    .hero-cta-wrap {
+      position: absolute;
+      bottom: 28%;
+      left: 45%;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards, float 3s ease-in-out 1.4s infinite;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      padding: 14px 28px;
+      border: 3px solid rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+
+    .hero-cta:hover {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.85);
+      transform: translateY(-2px);
+    }
+
+    .hero-cta-arrow {
+      font-size: 18px;
+      line-height: 1;
+      transition: transform 0.2s;
+    }
+
+    .hero-cta:hover .hero-cta-arrow {
+      transform: translateY(3px);
+    }
+
+    /* ── SECTION COMMON ── */
+    section {
+      padding: 100px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 60px;
+    }
+
+    /* ── PROFILE (合并 about + experience) ── */
+    #profile {
+      padding: 0;
+      max-width: 100%;
+      margin: 0;
+    }
+
+    .profile-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .profile-card {
+      background: var(--white);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .profile-right {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 上半：个人信息 */
+    .profile-info {
+      padding: 56px 52px 52px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .profile-name {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+
+    .profile-title {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .profile-bio {
+      font-size: 15px;
+      color: var(--black);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    /* 技能 Tags */
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      --tag-bg: #1d1d1f;
+      --tag-color: #ffffff;
+      background: var(--tag-bg);
+      color: var(--tag-color);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 7px 16px;
+      border-radius: 980px;
+      letter-spacing: 0.01em;
+    }
+
+    /* 工作经历时间线 */
+    .profile-timeline {
+      padding: 0 52px 12px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .timeline-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 56px 0 20px;
+      opacity: 0.5;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 24px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+      padding-bottom: 48px;
+    }
+
+    .timeline-period {
+      font-size: 12px;
+      color: var(--gray);
+      font-weight: 500;
+      line-height: 1.6;
+      padding-top: 4px;
+    }
+
+    .timeline-content h3 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 5px;
+      color: var(--black);
+    }
+
+    .timeline-content .company {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+
+    .timeline-content p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* 卡片底部联系栏 —— 装饰性细条 */
+    .profile-footer-wrap {
+      border-top: 1px solid rgba(210,210,215,0.4);
+      background: var(--white);
+    }
+
+    .profile-footer {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: 16px 52px;
+      gap: 0;
+      overflow: hidden;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .footer-item {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .footer-item + .footer-item {
+      padding-left: 20px;
+      border-left: 1px solid var(--divider);
+      margin-left: 20px;
+      opacity: 0.8;
+    }
+
+    .footer-label {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray);
+      opacity: 0.38;
+      margin-bottom: 3px;
+    }
+
+    .footer-value {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--gray);
+      opacity: 0.55;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── 手机端响应式 ── */
+    @media (max-width: 600px) {
+      #profile { padding: 80px 0; }
+
+      .profile-inner { padding: 0 16px; }
+
+      .profile-info { padding: 32px 24px 28px; }
+
+      .profile-name { font-size: 28px; }
+
+      .profile-title { margin-bottom: 20px; }
+
+      .profile-bio { font-size: 14px; margin-bottom: 24px; }
+
+      .profile-timeline { padding: 0 24px 12px; }
+
+      .timeline-item {
+        grid-template-columns: 64px 1fr;
+        gap: 16px;
+        padding: 22px 0;
+      }
+
+      .profile-footer {
+        flex-wrap: wrap;
+        padding: 16px 24px;
+        gap: 12px 0;
+      }
+
+      .footer-item {
+        flex: 1 1 50%;
+        min-width: 0;
+      }
+
+      .footer-item + .footer-item {
+        padding-left: 0;
+        border-left: none;
+        margin-left: 0;
+      }
+
+      .footer-value {
+        font-size: 11px;
+        white-space: normal;
+      }
+    }
+
+    /* ── WORKS ── */
+
+    .work-card {
+      background: var(--white);
+      
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .work-card.featured {
+      grid-column: 1 / -1;
+    }
+
+    .work-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .work-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .work-img-placeholder {
+      font-size: 13px;
+      color: var(--divider);
+      letter-spacing: 0.06em;
+    }
+
+    .work-info {
+      padding: 24px;
+    }
+
+    .work-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .work-info h3 {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .work-info p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    /* ── WORKS CAROUSEL ── */
+    #works {
+      padding-top: 100px;
+      max-width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 模糊背景层 —— 改图片只需修改下面路径 */
+    .works-bg {
+      position: absolute;
+      inset: -40px;
+      background-image: url('images/works-bg.jpg'); /* ← 改这里 */
+      background-size: cover;
+      background-position: center;
+      filter: blur(40px) brightness;
+      z-index: 0;
+    }
+
+    /* works内容在背景层上方 */
+    #works .section-label,
+    #works .section-title,
+    .works-carousel,
+    .carousel-dots {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* section-label和title颜色改白 */
+    #works .section-label { color: var(--black); }
+    #works .section-title { color: var(--black); }
+
+    #works .section-label,
+    #works .section-title {
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 24px;
+    }
+
+    .works-carousel {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .carousel-viewport {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .carousel-item {
+      min-width: 100%;
+    }
+
+    .carousel-item .work-card {
+      width: 100%;
+    }
+
+    /* 箭头：悬浮在卡片两侧灰色背景区 */
+    .carousel-btn {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .carousel-prev { left: -180px; }
+    .carousel-next { right: -180px; }
+
+    .carousel-btn::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 36px;
+      border-right: 5px solid #b0b0b5;
+      border-top: 5px solid #b0b0b5;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .carousel-prev::after {
+      transform: rotate(-135deg) translateX(-3px);
+    }
+
+    .carousel-next::after {
+      transform: rotate(45deg) translateX(-3px);
+    }
+
+    .carousel-btn:hover::after {
+      border-color: #6e6e73;
+    }
+
+    .carousel-prev:hover::after { transform: rotate(-135deg) translateX(-7px); }
+    .carousel-next:hover::after { transform: rotate(45deg) translateX(7px); }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .carousel-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--divider);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .carousel-dot.active {
+      background: var(--black);
+      transform: scale(1.25);
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--white);
+      
+      width: 100%;
+      max-width: 720px;
+      max-height: 90dvh;
+      overflow-y: auto;
+      padding: 32px 24px 48px;
+      animation: slideUp 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .modal-handle {
+      width: 40px;
+      height: 4px;
+      background: var(--divider);
+      
+      margin: 0 auto 28px;
+    }
+
+    .modal-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .modal h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .modal-images {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .modal-img {
+      width: 100%;
+      
+      background: var(--bg);
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      
+    }
+
+    .modal-img-placeholder {
+      font-size: 13px;
+      color: var(--divider);
+    }
+
+    .modal-body p {
+      font-size: 16px;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      
+      background: var(--bg);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--gray);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      text-align: center;
+      padding-bottom: 120px;
+    }
+
+    #contact .section-title {
+      margin-bottom: 24px;
+    }
+
+    #contact p {
+      color: var(--gray);
+      font-size: 19px;
+      margin-bottom: 48px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 980px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .contact-btn.primary {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .contact-btn.primary:hover {
+      background: #3a3a3c;
+    }
+
+    .contact-btn.secondary {
+      background: var(--white);
+      color: var(--black);
+      border: 1px solid var(--divider);
+    }
+
+    .contact-btn.secondary:hover {
+      border-color: var(--black);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--divider);
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to   { transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(4px); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      nav { padding: 0 16px; }
+
+      .nav-links { display: none; }
+
+      #hero { padding: 0; }
+
+      section { padding: 80px 20px; }
+
+      .works-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .work-card.featured {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-name" href="#hero">MY PORTFOLIO</a>
+  <ul class="nav-links">
+    <li><a href="#profile">关于我 & 经历</a></li>
+    <li><a href="#works">作品</a></li>
+    <li><a href="#contact">联系</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- 背景图占位：把图片命名为 hero-bg.jpg 放进 images 文件夹，然后删掉下面的 div，取消 img 注释 -->
+ <img class="hero-bg" src="./images/hero-bg.jpg" alt="">
+  
+  <!-- 浮动CTA，位于深蓝色方块区域，可拖动 bottom/left 调整位置 -->
+  <div class="hero-cta-wrap">
+    <a class="hero-cta" href="#works">
+      欢迎探索我的作品集
+      <span class="hero-cta-arrow">↓</span>
+    </a>
+  </div>
+</section>
+
+<!-- PROFILE：关于我 + 工作经历 合并 -->
+<section id="profile">
+  <div class="profile-card">
+
+    <!-- 个人信息 + 经历 -->
+    <div class="profile-right">
+
+      <!-- 上半：个人信息 -->
+      <div class="profile-info">
+        <p class="profile-name">刘畅</p>
+        <p class="profile-title">E-commerce Visual Designer</p>
+
+        <p class="profile-bio">
+          电商视觉设计师，5年+设计经验，擅长电商全链路视觉（KV / 首页 / 主图 / 详情页 / 营销物料），有品牌视觉策划及落地执行经验。多品类项目背景，适应能力强，AI 辅助提效已融入日常工作流。
+        </p>
+
+        <div class="skill-tags">
+          <span class="skill-tag" style="--tag-bg:#ea7136;">Photoshop</span>
+          <span class="skill-tag" style="--tag-bg:#3f71ba;">Nano Banana</span>
+          <span class="skill-tag" style="--tag-bg:#7492b6;">ComfyUI 工作流</span>
+          <span class="skill-tag">Blender</span>
+          <span class="skill-tag">即梦</span>
+          <span class="skill-tag">Illustrator</span>
+        </div>
+      </div>
+
+      <!-- 下半：工作经历时间线 -->
+      <div class="profile-timeline">
+        <p class="timeline-label">Work Experience</p>
+
+        <div class="timeline-item">
+          <div class="timeline-period">2025<br>2026.02</div>
+          <div class="timeline-content">
+            <h3>电商视觉设计师</h3>
+            <p class="company">上海璞康科技有限公司 · 南京</p>
+            <p>负责哈士奇品牌全年电商视觉设计，包括KV、首页、主图、详情页等，跨品类项目支持（食品/净水器/饮料），快速适应不同品牌调性与需求</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-period">2024<br>2025</div>
+          <div class="timeline-content">
+            <h3>视觉策划设计师</h3>
+            <p class="company">南京创冠食品有限公司 · 南京</p>
+            <p>独立负责品牌视觉策划与设计，从创意方向到落地执行全程主导，负责电商店铺视觉、微信公众号内容设计及日常更新维护，参与展会视觉策划及物料制作</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-period">2021<br>2024</div>
+          <div class="timeline-content">
+            <h3>视觉设计师 / 前端设计师</h3>
+            <p class="company">深圳蒸汽跳动科技有限公司 · 深圳</p>
+            <p>负责电子烟品牌电商全链路视觉：主图、详情页、活动海报、展会物料，协助C4D产品渲染及视频素材剪辑</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 底部联系栏 -->
+    <div class="profile-footer-wrap">
+      <div class="profile-footer">
+        <div class="footer-item">
+          <span class="footer-label">Email</span>
+          <span class="footer-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cbfefafaf8fbfefdfdff8bbabae5a8a4a6">[email&#160;protected]</a></span>
+        </div>
+        <div class="footer-item">
+          <span class="footer-label">Tel</span>
+          <span class="footer-value">15171465121</span>
+        </div>
+        <div class="footer-item">
+          <span class="footer-label">Loc</span>
+          <span class="footer-value">上海</span>
+        </div>
+        <div class="footer-item">
+          <span class="footer-label">DOB</span>
+          <span class="footer-value">1996.10</span>
+        </div>
+        <div class="footer-item">
+          <span class="footer-label">Edu</span>
+          <span class="footer-value">长江职业学院 · 视觉设计</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="works-bg" id="works-bg"></div>
+  <p class="section-label">Works</p>
+  <h2 class="section-title">项目作品</h2>
+  <div class="works-carousel">
+    <button class="carousel-btn carousel-prev" onclick="carouselMove(-1)" aria-label="上一个"></button>
+    <button class="carousel-btn carousel-next" onclick="carouselMove(1)" aria-label="下一个"></button>
+
+    <div class="carousel-viewport">
+      <div class="carousel-track" id="carousel-track">
+
+        <!-- 项目1：哈士奇 -->
+        <div class="carousel-item">
+          <div class="work-card" onclick="sessionStorage.setItem('returnTo','works'); window.location.href='hashi.html'">
+            <div class="work-img">
+              <span class="work-img-placeholder"><img src="images/hck-封面.jpg" alt="项目图片"></span>
+            </div>
+            <div class="work-info">
+              <p class="work-tag">电商全案 · 京东</p>
+              <h3>哈士奇冰吧旗舰店视觉设计</h3>
+              <p>店铺首页、详情页、活动 banner 全案设计，AI 辅助提升出图效率 40%+</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 项目2：展会 -->
+        <div class="carousel-item">
+          <div class="work-card" onclick="openModal('modal-expo')">
+            <div class="work-img">
+              <span class="work-img-placeholder"><img src="images/展会首图.jpg" alt="项目图片"></span>
+            </div>
+            <div class="work-info">
+              <p class="work-tag">展会物料</p>
+              <h3>行业展会视觉方案</h3>
+              <p>展位设计及大尺寸物料制作，现场落地执行</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 项目3：五菱 -->
+        <div class="carousel-item">
+          <div class="work-card" onclick="openModal('modal-wuling')">
+            <div class="work-img">
+              <span class="work-img-placeholder"><img src="images/五菱封面.jpg" alt="项目图片"></span>
+            </div>
+            <div class="work-info">
+              <p class="work-tag">品牌合作</p>
+              <h3>五菱汽车易拉宝设计</h3>
+              <p>品牌合作物料及设计</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 指示点 -->
+  <div class="carousel-dots" id="carousel-dots">
+    <span class="carousel-dot active" onclick="carouselGo(0)"></span>
+    <span class="carousel-dot" onclick="carouselGo(1)"></span>
+    <span class="carousel-dot" onclick="carouselGo(2)"></span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <h2 class="section-title">期待合作</h2>
+  <p>欢迎品牌方、代运营公司、设计等团队联系洽谈</p>
+  <div class="contact-links">
+    <a class="contact-btn primary" href="/cdn-cgi/l/email-protection#4d3422383f0d28202c2421632e2220">发送邮件</a>
+    <a class="contact-btn secondary" href="tel:15171465121">电话联系</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 你的名字 · Visual Designer</p>
+</footer>
+
+
+<!-- ── MODALS ── -->
+
+<!-- Modal：哈士奇 -->
+<div class="modal-overlay" id="modal-hashi" onclick="closeModal(event, 'modal-hashi')">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeModalById('modal-hashi')">✕</button>
+    <div class="modal-handle"></div>
+    <p class="modal-tag">电商全案 · 京东</p>
+    <h2>哈士奇冰吧旗舰店视觉设计</h2>
+    <div class="modal-images">
+      <div class="modal-img">
+        <!-- <img src="./images/hashi-1.jpg" alt=""> -->
+        <span class="modal-img-placeholder">项目图片 1</span>
+      </div>
+      <div class="modal-img">
+        <!-- <img src="./images/hashi-2.jpg" alt=""> -->
+        <span class="modal-img-placeholder">项目图片 2</span>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p>【项目背景】在这里填写项目背景，2-3 句话说明客户是谁、项目规模。</p>
+      <p>【我的工作】负责店铺首页模块设计、详情页排版、活动 banner 出图，同期自学 AI 辅助出图，将单品详情页制作周期从 X 天压缩到 X 天。</p>
+      <p>【设计亮点】在这里写你觉得做得好的地方，或者遇到的挑战和解决方案。</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal：展会 -->
+<div class="modal-overlay" id="modal-expo" onclick="closeModal(event, 'modal-expo')">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeModalById('modal-expo')">✕</button>
+    <div class="modal-handle"></div>
+    <p class="modal-tag">展会物料</p>
+    <h2>行业展会视觉方案</h2>
+    <div class="modal-images">
+      <div class="modal-img" style="aspect-ratio: 1064/6338; width: 100%; max-width: 600px; margin: 0 auto;">
+        <img src="./images/行业展会.jpg" alt="商品详情页" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+    </div>
+    <div class="modal-body">
+      <p>【项目背景】电子烟国外行业展。</p>
+      <p>【我的工作】负责产品整体风格把控，展位视觉方案设计，包括展板、易拉宝、背景墙等大尺寸物料，并跟进印刷落地。</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal：五菱 -->
+<div class="modal-overlay" id="modal-wuling" onclick="closeModal(event, 'modal-wuling')">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeModalById('modal-wuling')">✕</button>
+    <div class="modal-handle"></div>
+    <p class="modal-tag">品牌合作</p>
+    <h2>五菱汽车物料展板设计</h2>
+    <div class="modal-images">
+      <div class="modal-img" style="aspect-ratio: 1200/3200; width: 100%;">
+        <img src="./images/五菱.jpg" alt="五菱汽车易拉宝" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+    </div>
+    <div class="modal-body">
+      <p>【项目背景】物料设计，进行改版升级及多尺寸适配。</p>
+      <p>【我的工作】在原有品牌规范基础上重新排版，优化视觉层级，适配不同展示场景尺寸需求。</p>
+    </div>
+  </div>
+</div>
+
+
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  /* ── 返回定位 ── */
+  window.addEventListener('load', () => {
+
+
+    const returnTo = sessionStorage.getItem('returnTo');
+    if (returnTo) {
+      sessionStorage.removeItem('returnTo');
+      const el = document.getElementById(returnTo);
+      if (el) el.scrollIntoView({ behavior: 'instant' });
+    }
+  });
+
+  /* ── CAROUSEL ── */
+  let carouselIndex = 0;
+
+  function carouselMove(dir) {
+    const items = document.querySelectorAll('.carousel-item');
+    carouselIndex = (carouselIndex + dir + items.length) % items.length;
+    updateCarousel();
+  }
+
+  function carouselGo(index) {
+    carouselIndex = index;
+    updateCarousel();
+  }
+
+  // 三个项目的封面图路径，顺序对应轮播顺序
+  const coverImages = [
+    'images/hck-封面.jpg',
+    'images/展会首图.jpg',
+    'images/五菱封面.jpg'
+  ];
+
+  function updateCarousel() {
+    document.getElementById('carousel-track').style.transform =
+      `translateX(-${carouselIndex * 100}%)`;
+    document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === carouselIndex);
+    });
+  }
+
+  /* ── MODAL ── */
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // 统一关闭函数，所有地方都走这里，保证 overflow 必定被重置
+  function closeModalById(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeModal(e, id) {
+    if (e.target === e.currentTarget) closeModalById(id);
+  }
+</script>
